@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Telephone</th>
+      <th>Role</th>
+      <th>Change Role</th>
+      <th>Change Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let user of userList | paginate: config">
+      <td >{{user.surname}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.userRole}}</td>
+      <td>
+        <button [class]="disableButton(user.status)" *ngIf="user.userRole === 'USER_ROLE'" (click)="changeUserRole(user.id,user.userRole)" class="button">
+          Admin
+        </button>
+        <button [class]="disableButton(user.status)" *ngIf="user.userRole === 'ADMIN_ROLE'" (click)="changeUserRole(user.id,user.userRole)" class="button">
+          User
+        </button>
+      </td>
+      <td>
+        <button *ngIf="user.status === true" (click)="changeStatus(user.id,user.status)" class="button">Deactivate
+        </button>
+        <button *ngIf="user.status === false" (click)="changeStatus(user.id,user.status)" class="button">Activate
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>

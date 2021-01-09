@@ -1,0 +1,56 @@
+td{
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size: 20px;
+  color: #9a9da0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 35px;
+  text-align: left;
+}
+
+label {
+  color: #9a9da0;
+  font-size: 17px;
+}
+
+div.container {
+  margin-top: 5%;
+  background-color: #343a40;
+  width: 20%;
+  padding: 10px 10px 10px 10px;
+  border-radius: 5px;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+table{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+button {
+  margin-top: 2%;
+  margin-left: 2%;
+  color: #9a9da0;
+  background-color: #343a40;
+}
+
+button:hover {
+  margin-top: 2%;
+  margin-left: 2%;
+  color: #343a40;
+  background-color: #9a9da0;
+}
+
+.form-title{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  color: #9a9da0;
+  margin-left: 15%;
+
+}
+
+.buttons-container{
+  margin-left: 2%;
+  margin-bottom: 3%;
+}
