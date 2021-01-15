@@ -53,3 +53,7 @@ button:hover {
   color: #9a9da0;
 
 }
+
+.error-message{
+  color: red;
+}

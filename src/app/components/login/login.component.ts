@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   title = 'Login';
   formGroup;
+  errorMessage = '';
 
   constructor(private userservice: UserService, private router: Router, private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
@@ -25,13 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formData) {
+    this.errorMessage = '';
     const email = formData.email;
     const password = formData.password;
     this.userservice.login(email, password).subscribe(
       (res) => {
         localStorage.setItem('currentUser', JSON.stringify(res));
         this.router.navigateByUrl('/home');
-      }
+      },
+    (err) => {
+        console.log('error', err);
+        this.errorMessage =  err.error.message;
+    }
     );
   }
 
