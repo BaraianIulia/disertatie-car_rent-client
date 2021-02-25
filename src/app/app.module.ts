@@ -16,6 +16,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserPasswordChangeComponent } from './components/user-password-change/user-password-change.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,11 @@ import { UserPasswordChangeComponent } from './components/user-password-change/u
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

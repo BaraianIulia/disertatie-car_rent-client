@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   title = 'Register';
   formGroup;
   registerData: User;
+  birthdate: Date;
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
@@ -32,12 +33,18 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(formData) {
-    this.registerData = new User(0, formData.name, formData.surname, new Date('1997-10-10'),
+    this.registerData = new User(0, formData.name, formData.surname, this.birthdate,
       formData.email, formData.password, formData.phone, formData.address, 'USER_ROLE', null, true);
     console.log('user to register', this.registerData);
+    console.log('birthdate', this.birthdate)
     this.userService.register(this.registerData).subscribe(data => {
       console.log('DONE', data);
       this.router.navigate(['/login']);
     });
+  }
+
+  onChangeEvent($event) {
+    console.log('date event', $event.value);
+    this.birthdate = $event.value;
   }
 }

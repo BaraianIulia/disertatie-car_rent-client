@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     const password = formData.password;
     this.userservice.login(email, password).subscribe(
       (res) => {
+        console.log('user', res);
         localStorage.setItem('currentUser', JSON.stringify(res));
         this.router.navigateByUrl('/home');
       },

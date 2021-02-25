@@ -36,6 +36,16 @@
     </div>
 
     <div class="form-group">
+    <label for="repeatpassword">Birthdate</label>
+      <br>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" (dateChange)="onChangeEvent($event)">
+      <mat-datepicker-toggle   matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    </div>
+
+    <div class="form-group">
       <label for="phone">Phone number</label>
       <input type="text" class="form-control" id="phone"
              placeholder="Enter phone number" formControlName="phone" />
