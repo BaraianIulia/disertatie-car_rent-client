@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="filtersLoaded | async" class="container">
   <h1 class="form-title">
     {{title}}
   </h1>

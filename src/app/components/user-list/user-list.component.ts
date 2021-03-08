@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {Router} from '@angular/router';
+import {CurrentUser} from '../../models/currentUser.model';
 
 @Component({
   selector: 'app-user-list',
@@ -12,7 +13,8 @@ export class UserListComponent implements OnInit {
 
   config: any;
   userList: User[];
-  currentUser: User;
+  currentUser: CurrentUser;
+  filtersLoaded: Promise<boolean>;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -29,6 +31,7 @@ export class UserListComponent implements OnInit {
             currentPage: 1,
             totalItems: this.userList.length
           };
+          this.filtersLoaded = Promise.resolve(true);
         }
       );
   }
@@ -43,9 +46,6 @@ export class UserListComponent implements OnInit {
         (res) => {
           const itemIndex = this.userList.findIndex(item => item.id === id);
           this.userList[itemIndex] = res;
-          this.router.navigateByUrl('/RefreshComponent', {skipLocationChange: true}).then(() => {
-            this.router.navigate(['/users']);
-          });
         }
       );
   }
@@ -56,9 +56,6 @@ export class UserListComponent implements OnInit {
         (res) => {
           const itemIndex = this.userList.findIndex(item => item.id === id);
           this.userList[itemIndex] = res;
-          this.router.navigateByUrl('/RefreshComponent', {skipLocationChange: true}).then(() => {
-            this.router.navigate(['/users']);
-          });
         }
       );
   }

@@ -1,0 +1,139 @@
+<div class="container">
+  <h1 class="form-title">
+    {{title}}
+  </h1>
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+    <div class="form-group">
+      <label for="vehicleIdentificationNumber">Vehicle Identification Number</label>
+      <button style="float: right" tooltip="Write the vehicle identification number of the car" placement="top">?</button>
+      <input type="text" class="form-control" id="vehicleIdentificationNumber"
+             placeholder="Enter vehicle identification number" formControlName="vehicleIdentificationNumber"/>
+    </div>
+
+    <div class="form-group">
+      <label >Brand:</label>
+      <button style="float: right" tooltip="Select the brand of the car" placement="top">?</button>
+      <select class="form-control" (change)="changeBrand(brand.value)" #brand>
+        <option style=" width: auto !important;" *ngFor="let brand of brandList">{{brand}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="model">Model</label>
+      <button style="float: right" tooltip="Write the model of the car" placement="top">?</button>
+      <input type="text" class="form-control" id="model"
+             placeholder="Enter car's model" formControlName="model"/>
+    </div>
+
+    <div class="form-group">
+      <label for="doors">Doors</label>
+      <button style="float: right" tooltip="Select the number of car doors" placement="top">?</button>
+      <input type="number" class="form-control" id="doors"
+             placeholder="Enter number of doors for the car" formControlName="doors"
+             min="1" max="10"/>
+    </div>
+
+    <div class="form-group">
+      <label for="seats">Seats</label>
+      <button style="float: right" tooltip="Select the number of car seats" placement="top">?</button>
+      <input type="number" class="form-control" id="seats"
+             placeholder="Enter number of seats for the car" formControlName="seats"
+             min="1" max="10"/>
+    </div>
+
+
+    <div class="form-group">
+      <label for="fabricationYear">Fabrication Year</label>
+      <button style="float: right" tooltip="Select the fabrication year of the car" placement="top">?</button>
+      <input type="number" class="form-control" id="fabricationYear"
+             placeholder="Enter the fabrication year of the car" formControlName="fabricationYear"
+             min="1995" max="2021"/>
+    </div>
+
+    <div class="form-group">
+      <label >Gearbox:</label>
+      <button style="float: right" tooltip="Select the gearbox type of the car" placement="top">?</button>
+      <select class="form-control" (change)="changeGearbox(gearbox.value)" #gearbox>
+        <option *ngFor="let gearbox of gearboxList">{{gearbox}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pricePerDay">Price per day</label>
+      <button style="float: right" tooltip="Select the price of renting the car per day (EURO)" placement="top">?</button>
+      <input type="number" class="form-control" id="pricePerDay"
+             placeholder="Enter the price per day for renting the car" formControlName="pricePerDay"
+             min="1" max="1000"/>
+    </div>
+
+    <div class="form-group">
+      <label for="insurance">Insurance</label>
+      <button style="float: right" tooltip="Select the price of the car insurance" placement="top">?</button>
+      <input type="number" class="form-control" id="insurance"
+             placeholder="Enter the insurance for renting the car" formControlName="insurance"
+             min="1" max="1000"/>
+    </div>
+
+    <div class="form-group">
+      <label for="horsePower">Horse Power</label>
+      <button style="float: right" tooltip="Select the HP of the car" placement="top">?</button>
+      <input type="number" class="form-control" id="horsePower"
+             placeholder="Enter the horsePower of the car" formControlName="horsePower"
+             min="1" max="500"/>
+    </div>
+
+    <div class="form-group">
+      <label >Color:</label>
+      <button style="float: right" tooltip="Select the color of the car" placement="top">?</button>
+      <select class="form-control" (change)="changeColor(color.value)" #color>
+        <option *ngFor="let color of colorList">{{color}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Conditional Air:</label>
+      <button style="float: right" tooltip="Select if the car has conditional air" placement="top">?</button>
+      <div>
+        <input id="conditionalAirYes" type="radio" value="yes" name="conditionalAir" formControlName="conditionalAir" [value]=true>
+        <label for="conditionalAirYes">Yes</label>
+      </div>
+
+      <div>
+        <input id="conditionalAirNo" type="radio" value="no" name="conditionalAir" formControlName="conditionalAir" [value]=false>
+        <label for="conditionalAirNo">No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label >Fuel Type:</label>
+      <button style="float: right" tooltip="Select the fuel type of the car" placement="top">?</button>
+      <select class="form-control" (change)="changeFuelType(fuelType.value)" #fuelType>
+        <option *ngFor="let fuelType of fuelTypeList">{{fuelType}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="luggageCarrierVolume">Luggage Carrier Volume</label>
+      <button style="float: right" tooltip="Select the number of luggage(small) that fits in the trunk of the car" placement="top">?</button>
+      <input type="number" class="form-control" id="luggageCarrierVolume"
+             placeholder="Enter the luggage carrier volume for the car" formControlName="luggageCarrierVolume"
+             min="1" max="10"/>
+    </div>
+
+    <label for="file">Pick a photo of the car</label>
+    <input id="file" #file type="file" (change)="handleFileInput($event)"/>
+    <br>
+    <br>
+    <img [src]="imgURL" height="200" *ngIf="imgURL">
+
+    <br>
+    <br>
+    <button class="btn btn-primary" type="submit">Add</button>
+    <br>
+    <br>
+    <label class="alert-success">{{successMessage}}</label>
+    <label class="alert-danger">{{errorMessage}}</label>
+  </form>
+</div>

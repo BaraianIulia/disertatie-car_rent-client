@@ -3,6 +3,7 @@ import {User} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
+import {CurrentUser} from '../../models/currentUser.model';
 
 @Component({
   selector: 'app-user-edit',
@@ -11,11 +12,12 @@ import {FormBuilder} from '@angular/forms';
 })
 export class UserEditComponent implements OnInit {
 
-  private currentUser: User;
+  private currentUser: CurrentUser;
   title = 'Edit profile';
   formGroup;
   private editedUser: User;
   private user: User;
+  filtersLoaded: Promise<boolean>;
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
   }
@@ -34,16 +36,18 @@ export class UserEditComponent implements OnInit {
             address: this.user.address,
             terms: false
           });
+          this.filtersLoaded = Promise.resolve(true);
         }
       );
   }
 
   onSubmit(formData) {
-    this.editedUser = new User(this.currentUser.id, formData.name, formData.surname, this.currentUser.birthdate,
-      formData.email, this.currentUser.password, formData.phone, formData.address, this.currentUser.userRole,
-      this.currentUser.photo, this.currentUser.status);
-    this.userService.editUserProfileData(this.editedUser).subscribe(data => {
-      localStorage.setItem('currentUser', JSON.stringify(data));
+    this.editedUser = new User(this.user.id, formData.name, formData.surname, this.user.birthdate,
+      formData.email, this.user.password, formData.phone, formData.address, this.user.userRole,
+      this.user.photo, this.user.status);
+    this.userService.editUserProfileData(this.editedUser).subscribe(res => {
+      this.currentUser = new CurrentUser(res.id, res.name, res.surname, res.email, res.userRole);
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
       this.router.navigate(['/profile']);
     });
   }

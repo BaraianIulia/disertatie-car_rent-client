@@ -3,6 +3,7 @@ import {User} from '../../models/user.model';
 import {FormBuilder} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
+import {CurrentUser} from '../../models/currentUser.model';
 
 @Component({
   selector: 'app-user-password-change',
@@ -11,10 +12,9 @@ import {Router} from '@angular/router';
 })
 export class UserPasswordChangeComponent implements OnInit {
 
-  private currentUser: User;
+  private currentUser: CurrentUser;
   title = 'Change password';
   formGroup;
-  private editedUser: User;
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
   }

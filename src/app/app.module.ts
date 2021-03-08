@@ -11,13 +11,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {UserService} from './services/user.service';
 import {HomeComponent} from './components/home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserPasswordChangeComponent } from './components/user-password-change/user-password-change.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {NavigationComponent} from './components/navigation/navigation.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {UserPasswordChangeComponent} from './components/user-password-change/user-password-change.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDatepickerModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {CarAddComponent} from './components/car-add/car-add.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {CarService} from './services/car.service';
+import { UserProfilePictureChangeComponent } from './components/user-profile-picture-change/user-profile-picture-change.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angul
     NavigationComponent,
     UserProfileComponent,
     UserPasswordChangeComponent,
+    CarAddComponent,
+    UserProfilePictureChangeComponent,
 
   ],
   imports: [
@@ -44,8 +50,9 @@ import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angul
     MatDatepickerModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
+    TooltipModule.forRoot()
   ],
-  providers: [UserService],
+  providers: [UserService, CarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

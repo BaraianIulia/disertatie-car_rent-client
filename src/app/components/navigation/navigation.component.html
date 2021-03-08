@@ -10,12 +10,17 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="home" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
+      <div *ngIf="currentUser !== null && currentUser.userRole === 'ADMIN_ROLE'" class="nav-item dropdown">
+        <button class="btn nav-item dropdown-toggle" type="button" data-toggle="dropdown">Admin Actions
+          <span class="caret"></span></button>
+        <ul class=" nav-item dropdown-menu">
+          <li class="nav-item"><a class="not-active nav-item" routerLink="car/add" href="#">Add Car</a></li>
+          <li class="nav-item"><a class="not-active nav-item" routerLink="users" href="#">Manage Users</a></li>
+          <li class="nav-item"><a class="not-active nav-item" href="#">JavaScript</a></li>
+        </ul>
+      </div>
       <li class="nav-item">
-        <a *ngIf="currentUser !== null && currentUser.userRole === 'ADMIN_ROLE'" class="nav-link"
-           routerLink="users" href="#">Users</a>
-      </li>
-      <li class="nav-item">
-        <a *ngIf="currentUser === null" class="nav-link" href="#"  routerLink="login" >Login</a>
+        <a *ngIf="currentUser === null" class="nav-link" href="#" routerLink="login">Login</a>
       </li>
       <li class="nav-item">
         <a *ngIf="currentUser !== null" (click)="logout()" class="nav-link" href="#">Logout</a>

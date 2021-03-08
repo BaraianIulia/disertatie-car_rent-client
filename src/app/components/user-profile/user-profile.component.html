@@ -1,27 +1,32 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<div class="container">
+<div *ngIf="filtersLoaded | async" class="container">
   <h1 class="form-title">
     {{title}}
   </h1>
 
+  <div *ngIf="null != user.photo || empty != user.photo || undefined != user.photo">
+    <img [src]="user.photo" height="200" *ngIf="user.photo">
+  </div>
+
   <table>
     <tr>
       <td>First Name</td>
-      <td >{{user.surname}}</td>
+      <td>{{user.surname}}</td>
+
     </tr>
     <tr>
       <td>Last Name</td>
-      <td >{{user.name}}</td>
+      <td>{{user.name}}</td>
 
     </tr>
     <tr>
       <td>Email</td>
-      <td >{{user.email}}</td>
+      <td>{{user.email}}</td>
 
     </tr>
     <tr>
       <td>Phone Number</td>
-      <td >{{user.phone}}</td>
+      <td>{{user.phone}}</td>
 
     </tr>
     <tr>
@@ -32,6 +37,6 @@
   <div class="buttons-container">
     <button (click)="redirectToEditPage()" class="btn btn-secondary">Edit profile</button>
     <button (click)="redirectToChangePasswordPage()" class="btn btn-secondary">Change password</button>
-    <button class="btn btn-secondary">Change profile picture</button>
+    <button (click)="redirectToChangePicturePage()" class="btn btn-secondary">Change profile picture</button>
   </div>
 </div>

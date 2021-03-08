@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
-import {User} from '../../models/user.model';
+import {CurrentUser} from '../../models/currentUser.model';
 
 @Component({
   selector: 'app-navigation',
@@ -9,7 +9,7 @@ import {User} from '../../models/user.model';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  private currentUser: User;
+  private currentUser: CurrentUser;
 
 
   constructor(private router: Router, private userService: UserService) {

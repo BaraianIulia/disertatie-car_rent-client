@@ -12,9 +12,9 @@ export class UserProfileComponent implements OnInit {
   private currentUser: User;
   title = 'Your profile';
   private user: any;
+  filtersLoaded: Promise<boolean>;
 
   constructor(private userService: UserService, private router: Router) {
-
   }
 
   ngOnInit() {
@@ -23,9 +23,12 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (res) => {
           this.user = res;
+          console.log(this.user);
+          this.filtersLoaded = Promise.resolve(true);
         }
       );
   }
+
 
   redirectToEditPage() {
     this.router.navigate(['/profile/edit']);
@@ -33,5 +36,9 @@ export class UserProfileComponent implements OnInit {
 
   redirectToChangePasswordPage() {
     this.router.navigate(['/profile/edit/password']);
+  }
+
+  redirectToChangePicturePage() {
+    this.router.navigate(['/profile/edit/picture']);
   }
 }

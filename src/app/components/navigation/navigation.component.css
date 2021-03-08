@@ -1,0 +1,22 @@
+.not-active {
+  cursor: default;
+  color: black;
+}
+
+button {
+  color: #9a9da0;
+  background-color: #343a40;
+}
+
+button:hover {
+  color: #9a9da0;
+  border-color: #9a9da0;
+}
+
+li:hover {
+  background-color: #55697d;
+}
+
+
+
+

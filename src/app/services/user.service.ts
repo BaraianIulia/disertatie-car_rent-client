@@ -68,7 +68,7 @@ export class UserService {
   }
 
   editUserProfileData(editedUser: User) {
-    return this.http.post(`${this.uri}/edit/profile`, editedUser);
+    return this.http.post<User>(`${this.uri}/edit/profile`, editedUser);
   }
 
   changePassword(userId: number, actualPassword: string, newPassword: string) {
@@ -83,5 +83,11 @@ export class UserService {
     const params = new HttpParams()
       .set('userId', String(userId));
     return this.http.post<User>(`${this.uri}/user`, {}, {params});
+  }
+
+  changeProfilePicture(photo: any, userId: number) {
+    const params = new HttpParams()
+      .set('userId', String(userId));
+    return this.http.post(`${this.uri}/edit/picture`, photo, {params});
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
+import {CurrentUser} from '../../models/currentUser.model';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   title = 'Login';
   formGroup;
   errorMessage = '';
+  currentUser: CurrentUser;
 
   constructor(private userservice: UserService, private router: Router, private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
@@ -32,13 +34,14 @@ export class LoginComponent implements OnInit {
     this.userservice.login(email, password).subscribe(
       (res) => {
         console.log('user', res);
-        localStorage.setItem('currentUser', JSON.stringify(res));
+        this.currentUser = new CurrentUser(res.id, res.name, res.surname, res.email, res.userRole);
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
         this.router.navigateByUrl('/home');
       },
-    (err) => {
+      (err) => {
         console.log('error', err);
-        this.errorMessage =  err.error.message;
-    }
+        this.errorMessage = err.error.message;
+      }
     );
   }
 

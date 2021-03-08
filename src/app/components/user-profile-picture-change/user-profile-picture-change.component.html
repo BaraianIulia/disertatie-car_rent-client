@@ -1,0 +1,25 @@
+<div *ngIf="filtersLoaded | async" class="container">
+  <h1 class="form-title">
+    {{title}}
+  </h1>
+
+  <label>Current picture</label>
+
+  <div *ngIf="null != user.photo || empty != user.photo || undefined != user.photo">
+    <img [src]="user.photo" height="200" *ngIf="user.photo">
+  </div>
+
+
+  <form (ngSubmit)="onSubmit()">
+      <label for="file">Pick a new photo for your account</label>
+      <input id="file" #file type="file" (change)="handleFileInput($event)"/>
+      <br>
+      <br>
+      <img [src]="imgURL" height="200" *ngIf="imgURL">
+
+      <br>
+      <br>
+
+      <button class="btn btn-primary" type="submit">Change picture</button>
+    </form>
+</div>
