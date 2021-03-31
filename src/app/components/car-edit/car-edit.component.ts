@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
 import {Car} from '../../models/car.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
 import {CarService} from '../../services/car.service';
 import {User} from '../../models/user.model';
 
 @Component({
-  selector: 'app-car-add',
-  templateUrl: './car-add.component.html',
-  styleUrls: ['./car-add.component.css']
+  selector: 'app-car-edit',
+  templateUrl: './car-edit.component.html',
+  styleUrls: ['./car-edit.component.css']
 })
-export class CarAddComponent implements OnInit {
+export class CarEditComponent implements OnInit {
 
   brandList: any = ['BMW', 'Audi', 'Ford'];
   gearboxList: any = ['MANUAL', 'AUTOMATIC'];
@@ -20,65 +20,61 @@ export class CarAddComponent implements OnInit {
   car: Car;
   successMessage = '';
   errorMessage = '';
-  title = 'Add Car';
+  title = 'Edit Car';
   fileToUpload;
   private formData: FormData;
   private reader: FileReader;
   private imgURL: string | ArrayBuffer;
   private currentUser: User;
+  private vin: any;
 
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private carService: CarService) {
-    this.formGroup = this.formBuilder.group({
-      vehicleIdentificationNumber: '',
-      brand: 'BMW',
-      model: '',
-      doors: '4',
-      seats: '5',
-      fabricationYear: '2010',
-      gearbox: 'MANUAL',
-      pricePerDay: '10',
-      insurance: '10',
-      horsePower: '100',
-      color: 'Blue',
-      conditionalAir: true,
-      fuelType: 'DIESEL',
-      luggageCarrierVolume: '2',
-      fileToUpload: '',
-    });
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
+              private carService: CarService) {
   }
 
   ngOnInit() {
-    console.log(this.currentUser);
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.currentUser);
     if (this.currentUser === null || this.currentUser === undefined) {
       this.router.navigate(['/home']);
     }
     if (this.currentUser.userRole !== 'ADMIN_ROLE') {
       this.router.navigate(['/home']);
     }
-  }
-
-  changeBrand(brand) {
-    console.log(brand);
-    console.log('Brand change ' + this.formGroup.brand + ' -> ' + brand);
-    this.formGroup.brand = brand;
-  }
-
-  changeGearbox(gearbox) {
-    console.log('GearBox change ' + this.formGroup.gearbox + ' -> ' + gearbox);
-    this.formGroup.gearbox = gearbox;
+    this.activatedRoute.params.subscribe(params => {
+      console.log(params.vin);
+      this.vin = params.vin;
+      this.carService.getCar(this.vin)
+        .subscribe(
+          (res) => {
+            this.car = res;
+            console.log(this.car);
+            this.formGroup = this.formBuilder.group({
+              vehicleIdentificationNumber: this.car.vehicleIdentificationNumber,
+              brand: this.car.brand,
+              model: this.car.model,
+              doors: this.car.doors,
+              seats: this.car.seats,
+              fabricationYear: this.car.fabricationYear,
+              gearbox: this.car.gearbox,
+              pricePerDay: this.car.pricePerDay,
+              insurance: this.car.insurance,
+              horsePower: this.car.horsePower,
+              color: this.car.color,
+              conditionalAir: this.car.conditionalAir,
+              fuelType: this.car.fuelType,
+              luggageCarrierVolume: this.car.luggageCarrierVolume
+            });
+            this.imgURL = this.car.photo;
+          }
+        );
+    });
   }
 
   changeColor(color) {
     console.log('Color change ' + this.formGroup.color + ' -> ' + color);
     this.formGroup.color = color;
-  }
-
-  changeFuelType(fuelType) {
-    console.log(fuelType);
-    console.log('Fuel type change ' + this.formGroup.fuelType + ' -> ' + fuelType);
-    this.formGroup.fuelType = fuelType;
   }
 
   onSubmit(formData) {
@@ -88,34 +84,15 @@ export class CarAddComponent implements OnInit {
       formData.fabricationYear, formData.gearbox, formData.pricePerDay, formData.insurance, formData.horsePower, formData.hexColor,
       formData.color, formData.conditionalAir, formData.fuelType, formData.luggageCarrierVolume, this.fileToUpload);
     console.log('car to add', this.car);
-    this.carService.addCar(this.car).subscribe(data => {
+    this.carService.editCar(this.car).subscribe(data => {
         console.log('DONE', data);
-        this.clear();
+        this.car = data;
         this.successMessage = 'Vehicle saved with success.';
       },
       error => {
         console.log(error);
         this.errorMessage = 'Vehicle could not be saved';
       });
-  }
-
-  clear() {
-    this.formGroup = this.formBuilder.group({
-      vehicleIdentificationNumber: '',
-      brand: 'BMW',
-      model: '',
-      doors: '4',
-      seats: '5',
-      fabricationYear: '2010',
-      gearbox: 'MANUAL',
-      pricePerDay: '10',
-      insurance: '10',
-      horsePower: '100',
-      color: 'Blue',
-      conditionalAir: true,
-      fuelType: 'DIESEL',
-      luggageCarrierVolume: '2'
-    });
   }
 
   handleFileInput(e) {

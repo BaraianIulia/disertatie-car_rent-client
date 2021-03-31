@@ -1,0 +1,13 @@
+<div class="car-list" *ngFor="let car of carList | paginate: config">
+    <div class="center">
+      <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
+        <img [src]="car.photo" height="330" *ngIf="car.photo">
+      </div>
+    <p>Car brand: {{car.brand}}</p>
+    <p>Car model: {{car.model}}</p>
+    <p>Fabrication year: {{car.fabricationYear}}</p>
+    <h2>{{car.pricePerDay}} €</h2>
+    <button (click)="redirectToCarDetails(car.vehicleIdentificationNumber)">Open</button>
+  </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>

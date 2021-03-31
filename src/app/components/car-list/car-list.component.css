@@ -1,0 +1,38 @@
+.car-list{
+  display: inline-block;
+  margin-top: 5%;
+  width: 20%;
+  border: medium groove;
+  position: relative;
+  border-radius: 5px;
+  margin-left: 10%;
+}
+
+.center{
+  width: auto;
+  height: auto;
+  margin: 5px auto 5px 5px;
+  position: relative;
+}
+
+div{
+  background-color: #9a9da0;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+button {
+  margin: 2% 2% 2% 70%;
+  color: #9a9da0;
+  background-color: #343a40;
+}
+
+button:hover {
+  margin: 2% 2% 2% 70%;
+  color: #343a40;
+  background-color: #9a9da0;
+}
+
