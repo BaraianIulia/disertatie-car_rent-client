@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {RegisterComponent} from './components/register/register.component';
 import {UserListComponent} from './components/user-list/user-list.component';
 import {LoginComponent} from './components/login/login.component';
@@ -9,6 +9,10 @@ import {UserEditComponent} from './components/user-edit/user-edit.component';
 import {UserPasswordChangeComponent} from './components/user-password-change/user-password-change.component';
 import {CarAddComponent} from './components/car-add/car-add.component';
 import {UserProfilePictureChangeComponent} from './components/user-profile-picture-change/user-profile-picture-change.component';
+import {CarListComponent} from './components/car-list/car-list.component';
+import {CarDetailsComponent} from './components/car-details/car-details.component';
+import {CarEditComponent} from './components/car-edit/car-edit.component';
+import {CarRentComponent} from './components/car-rent/car-rent.component';
 
 
 const routes: Routes = [
@@ -29,8 +33,24 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'cars/:id',
+    component: CarListComponent
+  },
+  {
     path: 'car/add',
     component: CarAddComponent
+  },
+  {
+    path: 'car/edit/:vin',
+    component: CarEditComponent
+  },
+  {
+    path: 'car/details/:vin',
+    component: CarDetailsComponent
+  },
+  {
+    path: 'car/rent/:vin',
+    component: CarRentComponent
   },
   {
     path: 'profile',
@@ -54,4 +74,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

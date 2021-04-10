@@ -17,7 +17,7 @@
   <p >Luggage volume : {{car.luggageCarrierVolume}}</p>
   <p >Insurance : {{car.insurance}} €</p>
   <h2 >{{car.pricePerDay}} € per day</h2>
-  <button (click)="rentCar(car.id)">Rent</button>
+  <button (click)="redirectToCarRent(car.vehicleIdentificationNumber)">Rent</button>
     <button *ngIf="currentUser.userRole === 'ADMIN_ROLE'" (click)="editCar(car.vehicleIdentificationNumber)">Edit</button>
   </div>
 </div>

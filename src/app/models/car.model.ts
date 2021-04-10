@@ -16,12 +16,12 @@ export class Car {
   conditionalAir: boolean;
   fuelType: string;
   luggageCarrierVolume: number;
-  fileToUpload: string;
+  photo: string;
 
 
   constructor(id: number, vehicleIdentificationNumber: string, brand: string, model: string, doors: number, seats: number,
               fabricationYear: number, gearbox: string, pricePerDay: number, insurance: number, horsePower: number, hexColor: number,
-              color: string, conditionalAir: boolean, fuelType: string, luggageCarrierVolume: number, fileToUpload: string) {
+              color: string, conditionalAir: boolean, fuelType: string, luggageCarrierVolume: number, photo: string) {
     this.id = id;
     this.vehicleIdentificationNumber = vehicleIdentificationNumber;
     this.brand = brand;
@@ -38,6 +38,6 @@ export class Car {
     this.conditionalAir = conditionalAir;
     this.fuelType = fuelType;
     this.luggageCarrierVolume = luggageCarrierVolume;
-    this.fileToUpload = fileToUpload;
+    this.photo = photo;
   }
 }

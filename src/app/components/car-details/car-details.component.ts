@@ -34,8 +34,9 @@ export class CarDetailsComponent implements OnInit {
     });
   }
 
-  rentCar(id: number) {
-    
+  redirectToCarRent(vin: string) {
+      console.log('rent' + vin);
+      this.router.navigate(['car/rent/', vin]);
   }
 
   editCar(vin: any) {

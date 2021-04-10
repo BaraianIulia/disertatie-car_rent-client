@@ -14,6 +14,8 @@ export class CarListComponent implements OnInit {
 
   carList: Car[];
   config: any;
+  private startDate: any;
+  private endDate: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private carService: CarService) {
     this.config = {
@@ -25,13 +27,7 @@ export class CarListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.carService.getAllCars()
-      .subscribe(
-        (res) => {
-          this.carList = res;
-          console.log(this.carList);
-        }
-      );
+    this.findCarsByDate();
   }
 
   redirectToCarDetails(vin: string) {
@@ -41,5 +37,25 @@ export class CarListComponent implements OnInit {
 
   pageChange(newPage: number) {
     this.router.navigate(['cars/' + newPage], {queryParams: {page: newPage}});
+  }
+
+  onChangeStartEvent($event) {
+    console.log('date start event', $event.value);
+    this.startDate = $event.value;
+  }
+
+  onChangeEndEvent($event) {
+    console.log('date end event', $event.value);
+    this.endDate = $event.value;
+  }
+
+  findCarsByDate() {
+    this.carService.getAllCars(this.startDate, this.endDate)
+      .subscribe(
+        (res) => {
+          this.carList = res;
+          console.log(this.carList);
+        }
+      );
   }
 }

@@ -21,7 +21,14 @@ import {MatDatepickerModule, MatInputModule, MatNativeDateModule} from '@angular
 import {CarAddComponent} from './components/car-add/car-add.component';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {CarService} from './services/car.service';
-import { UserProfilePictureChangeComponent } from './components/user-profile-picture-change/user-profile-picture-change.component';
+import {UserProfilePictureChangeComponent} from './components/user-profile-picture-change/user-profile-picture-change.component';
+import {CarListComponent} from './components/car-list/car-list.component';
+import {CarDetailsComponent} from './components/car-details/car-details.component';
+import { CarEditComponent } from './components/car-edit/car-edit.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
+import {DatePipe} from '@angular/common';
+import { CarRentComponent } from './components/car-rent/car-rent.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +43,11 @@ import { UserProfilePictureChangeComponent } from './components/user-profile-pic
     UserPasswordChangeComponent,
     CarAddComponent,
     UserProfilePictureChangeComponent,
+    CarListComponent,
+    CarDetailsComponent,
+    CarEditComponent,
+    JwPaginationComponent,
+    CarRentComponent
 
   ],
   imports: [
@@ -52,7 +64,7 @@ import { UserProfilePictureChangeComponent } from './components/user-profile-pic
     BrowserAnimationsModule,
     TooltipModule.forRoot()
   ],
-  providers: [UserService, CarService],
+  providers: [UserService, CarService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
