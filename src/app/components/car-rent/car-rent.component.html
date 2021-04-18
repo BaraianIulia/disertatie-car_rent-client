@@ -1,0 +1,127 @@
+<div class="container">
+  <h1 class="form-title">
+    {{title}}
+  </h1>
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+
+    <img [src]="imgURL" *ngIf="imgURL">
+
+    <br>
+    <br>
+
+    <div class="form-group">
+      <label>Pick-up and drop-off location: </label>
+     <p>{{this.pickupAndDropoffLocation}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Start date</label>
+      <br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerStart" (dateChange)="onChangeStartEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <label>End date</label>
+      <br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerEnd" (dateChange)="onChangeEndEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <label for="insurance">Insurance</label>
+      <button style="float: right" tooltip="Insurance value for the car" placement="top">?</button>
+      <input ngModel="{{car.insurance}}" type="text" class="form-control" id="insurance"
+             formControlName="insurance"/>
+    </div>
+
+    <div class="form-group">
+      <label for="totalPrice">Total Price</label>
+      <button style="float: right" tooltip="Price per day ({{car.pricePerDay}}) * number of days + insurance" placement="top">?</button>
+      <input ngModel="{{totalPrice}}" type="text" class="form-control" id="totalPrice"
+             placeholder="Pick the dates" formControlName="totalPrice"/>
+    </div>
+
+    <div class="form-group">
+      <label>Pay Method:</label>
+      <button style="float: right" tooltip="Choose the way you want to pay" placement="top">?</button>
+      <div>
+        <input id="cash" type="radio" value="cash" name="payMethod" formControlName="payMethod" >
+        <label for="cash">Cash</label>
+      </div>
+
+      <div>
+        <input id="my_Card" type="radio" value="my_Card" name="payMethod" formControlName="payMethod" (click)="getCards()">
+        <label for="my_Card">My Cards</label>
+      </div>
+      <div>
+        <input id="card" type="radio" value="card" name="payMethod" formControlName="payMethod">
+        <label for="card">New Card</label>
+      </div>
+    </div>
+
+    <div *ngIf="formGroup.value.payMethod === 'my_Card'">
+      <div class="form-group">
+        <label >My cards:</label>
+        <button style="float: right" tooltip="Select the card to pay with" placement="top">?</button>
+        <select class="form-control" (change)="changeCard(card.value)" #card>
+          <option style=" width: auto !important;" *ngFor="let card of cardList">{{card.cardNumber}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cvvCode">CVV Code</label>
+        <button style="float: right" tooltip="It is located on the back of the card and it has 3 digits" placement="top">
+          ?
+        </button>
+        <input type="password" class="form-control" id="cvvCode"
+               placeholder="XXX" formControlName="cvvCode"/>
+      </div>
+    </div>
+    <div *ngIf="formGroup.value.payMethod === 'card'">
+      <p>Pay with another card</p>
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <button style="float: right" tooltip="It is located on the front of the card and it has a size of 16 digits"
+                placement="top">?
+        </button>
+        <input type="text" class="form-control" id="cardNumber"
+               placeholder="XXXX XXXX XXXX XXXX" formControlName="cardNumber"/>
+      </div>
+      <div class="form-group">
+        <label for="cardholderName">Cardholder Name</label>
+        <button style="float: right" tooltip="It is located on the front of the card" placement="top">?</button>
+        <input type="text" class="form-control" id="cardholderName"
+               placeholder="Enter the cardholder name" formControlName="cardholderName"/>
+      </div>
+      <div class="form-group">
+        <label for="expirationDate">Expiration Date</label>
+        <button style="float: right" tooltip="It is located on the front of the card(DD/YY)" placement="top">?</button>
+        <input type="text" class="form-control" id="expirationDate"
+               placeholder="DD/YY" formControlName="expirationDate"/>
+      </div>
+      <div class="form-group">
+        <label for="cvvCode">CVV Code</label>
+        <button style="float: right" tooltip="It is located on the back of the card and it has 3 digits" placement="top">
+          ?
+        </button>
+        <input type="text" class="form-control" id="cvvCodeNew"
+               placeholder="XXX" formControlName="cvvCodeNew"/>
+      </div>
+
+    </div>
+
+
+    <button class="btn btn-primary" type="submit">Rent</button>
+    <br>
+    <br>
+    <label class="alert-success">{{successMessage}}</label>
+    <label class="alert-danger">{{errorMessage}}</label>
+  </form>
+</div>

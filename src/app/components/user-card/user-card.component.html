@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<div *ngIf="filtersLoaded | async" class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Card number</th>
+      <th>Card holder</th>
+      <th>Expiry date</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <p *ngIf="cardList.length.valueOf() === 0">{{emptyListMessage}}</p>
+    <tr *ngFor="let card of cardList">
+      <td>{{card.cardNumber}}</td>
+      <td>{{card.cardHolder}}</td>
+      <td>{{card.expiryDate}}</td>
+      <td>
+        <button (click)="deleteCard(card.id)" class="button">Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container" style="background-color: #343a40;">
+  <h1 class="form-title">
+    {{title}}
+  </h1>
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+    <div class="form-group">
+      <label for="cardNumber">Card Number</label>
+      <button style="float: right" tooltip="It is located on the front of the card and it has a size of 16 digits"
+              placement="top">?
+      </button>
+      <input type="text" class="form-control" id="cardNumber"
+             placeholder="XXXX XXXX XXXX XXXX" formControlName="cardNumber"/>
+    </div>
+    <div class="form-group">
+      <label for="cardholderName">Cardholder Name</label>
+      <button style="float: right" tooltip="It is located on the front of the card" placement="top">?</button>
+      <input type="text" class="form-control" id="cardholderName"
+             placeholder="Enter the cardholder name" formControlName="cardholderName"/>
+    </div>
+    <div class="form-group">
+      <label for="expirationDate">Expiration Date</label>
+      <button style="float: right" tooltip="It is located on the front of the card(DD/YY)" placement="top">?</button>
+      <input type="text" class="form-control" id="expirationDate"
+             placeholder="DD/YY" formControlName="expirationDate"/>
+    </div>
+    <div class="form-group">
+      <label for="cvvCode">CVV Code</label>
+      <button style="float: right" tooltip="It is located on the back of the card and it has 3 digits" placement="top">
+        ?
+      </button>
+      <input type="text" class="form-control" id="cvvCode"
+             placeholder="XXX" formControlName="cvvCode"/>
+    </div>
+
+
+    <br>
+    <br>
+    <button class="btn btn-primary" type="submit">Add</button>
+    <br>
+    <br>
+    <label class="alert-success">{{successMessage}}</label>
+    <label class="alert-danger">{{errorMessage}}</label>
+  </form>
+</div>
+
+
