@@ -28,6 +28,7 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import {DatePipe} from '@angular/common';
 import { CarRentComponent } from './components/car-rent/car-rent.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { CarRentComponent } from './components/car-rent/car-rent.component';
     CarDetailsComponent,
     CarEditComponent,
     JwPaginationComponent,
-    CarRentComponent
+    CarRentComponent,
+    UserCardComponent
 
   ],
   imports: [

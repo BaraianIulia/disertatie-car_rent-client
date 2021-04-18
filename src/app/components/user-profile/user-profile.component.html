@@ -4,7 +4,7 @@
     {{title}}
   </h1>
 
-  <div *ngIf="null != user.photo || empty != user.photo || undefined != user.photo">
+  <div style="margin-left: 25%" class="align-center" *ngIf="null != user.photo || empty != user.photo || undefined != user.photo">
     <img [src]="user.photo" height="200" *ngIf="user.photo">
   </div>
 
@@ -38,5 +38,6 @@
     <button (click)="redirectToEditPage()" class="btn btn-secondary">Edit profile</button>
     <button (click)="redirectToChangePasswordPage()" class="btn btn-secondary">Change password</button>
     <button (click)="redirectToChangePicturePage()" class="btn btn-secondary">Change profile picture</button>
+    <button (click)="redirectToChangeCardPage()" class="btn btn-secondary">View/Delete/Add card</button>
   </div>
 </div>

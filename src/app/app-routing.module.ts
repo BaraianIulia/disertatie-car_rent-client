@@ -13,6 +13,7 @@ import {CarListComponent} from './components/car-list/car-list.component';
 import {CarDetailsComponent} from './components/car-details/car-details.component';
 import {CarEditComponent} from './components/car-edit/car-edit.component';
 import {CarRentComponent} from './components/car-rent/car-rent.component';
+import {UserCardComponent} from './components/user-card/user-card.component';
 
 
 const routes: Routes = [
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     path: 'profile/edit/password',
     component: UserPasswordChangeComponent
+  },
+  {
+    path: 'profile/edit/card',
+    component: UserCardComponent
   },
   {
     path: 'profile/edit/picture',

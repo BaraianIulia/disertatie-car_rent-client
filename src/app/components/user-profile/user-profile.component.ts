@@ -41,4 +41,8 @@ export class UserProfileComponent implements OnInit {
   redirectToChangePicturePage() {
     this.router.navigate(['/profile/edit/picture']);
   }
+
+  redirectToChangeCardPage() {
+    this.router.navigate(['/profile/edit/card']);
+  }
 }
