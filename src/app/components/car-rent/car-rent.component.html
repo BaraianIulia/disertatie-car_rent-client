@@ -49,6 +49,9 @@
              placeholder="Pick the dates" formControlName="totalPrice"/>
     </div>
 
+    <label class="alert-success">{{successMessage}}</label>
+    <label class="alert-danger">{{errorMessage}}</label>
+
     <div class="form-group">
       <label>Pay Method:</label>
       <button style="float: right" tooltip="Choose the way you want to pay" placement="top">?</button>
@@ -118,10 +121,8 @@
     </div>
 
 
-    <button class="btn btn-primary" type="submit">Rent</button>
+    <button class="btn btn-primary" [disabled]="!disabledBtn" type="submit">Rent</button>
     <br>
     <br>
-    <label class="alert-success">{{successMessage}}</label>
-    <label class="alert-danger">{{errorMessage}}</label>
   </form>
 </div>

@@ -26,6 +26,9 @@ export class CarRentComponent implements OnInit {
   public cardList: Card[];
   pickupAndDropoffLocation = 'AEROPORT CLUJ, CLUJ-NAPOCA, ROMANIA';
   private orderDetail: OrderDetail;
+  private errorMessage = '';
+  private successMessage = '';
+  disabledBtn = true;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
               private carService: CarService, private cardService: CardService, private orderService: OrderService) {
@@ -69,6 +72,7 @@ export class CarRentComponent implements OnInit {
     console.log('date start event', $event.value);
     this.startDate = $event.value;
     this.calculateTotalPrice();
+    this.checkCarForAvailability();
   }
 
 
@@ -76,6 +80,7 @@ export class CarRentComponent implements OnInit {
     console.log('date end event', $event.value);
     this.endDate = $event.value;
     this.calculateTotalPrice();
+    this.checkCarForAvailability();
   }
 
 
@@ -141,5 +146,23 @@ export class CarRentComponent implements OnInit {
   changeCard(value: any) {
     console.log('changeValue of card', value);
     this.formGroup.value.usedCard = value;
+  }
+
+  private checkCarForAvailability() {
+    this.errorMessage = '';
+    this.successMessage = '';
+    if (this.endDate !== undefined && this.startDate !== undefined) {
+      this.carService.checkCarForAvailability(this.car.id, this.startDate, this.endDate).subscribe((res) => {
+        console.log('availability:', res);
+        this.disabledBtn = res;
+        if (res === true) {
+          this.successMessage = 'The vehicle is available for this period.';
+        } else {
+          this.errorMessage = 'The vehicle is not available for this period.';
+        }
+      }, (error => {
+        console.log(error);
+      }));
+    }
   }
 }

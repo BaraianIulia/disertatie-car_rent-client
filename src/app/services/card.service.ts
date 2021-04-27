@@ -26,4 +26,5 @@ export class CardService {
   deleteCard(cardId: number) {
     return this.http.delete(`${this.uri}/delete/` + cardId);
   }
+
 }

@@ -35,4 +35,13 @@ export class CarService {
   editCar(car: Car) {
     return this.http.post<Car>(`${this.uri}/edit`, car);
   }
+
+  checkCarForAvailability(id: number, startDate: Date, endDate: Date) {
+    const params = new HttpParams()
+      .set('carId', id.toString())
+      .set('startDate', this.datepipe.transform(startDate, 'yyyy-MM-dd'))
+      .set('endDate', this.datepipe.transform(endDate, 'yyyy-MM-dd'));
+    console.log('getAllCars', params);
+    return this.http.get<boolean>(`${this.uri}/availability`, {params});
+  }
 }
