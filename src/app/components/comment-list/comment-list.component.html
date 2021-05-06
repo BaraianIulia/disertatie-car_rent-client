@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<div *ngIf="filtersLoaded | async" class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Author</th>
+      <th>Email</th>
+      <th>Car Id</th>
+      <th>Text</th>
+      <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let comment of commentList | paginate: config">
+      <td>{{comment.id}}</td>
+      <td>{{comment.author}}</td>
+      <td>{{comment.authorEmail}}</td>
+      <td>{{comment.carId}}</td>
+      <td>{{comment.text}}</td>
+      <td>{{comment.rating}}</td>
+      <td>
+        <button (click)="approveComment(comment)" class="button">
+          Accept
+        </button>
+      </td>
+      <td>
+        <button (click)="deleteComment(comment)" class="button">Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
