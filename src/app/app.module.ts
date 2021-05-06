@@ -29,6 +29,9 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import {DatePipe} from '@angular/common';
 import { CarRentComponent } from './components/car-rent/car-rent.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import {CommentService} from './services/comment.service';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { RatingModule } from 'ng-starrating';
 
 
 @NgModule({
@@ -49,7 +52,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     CarEditComponent,
     JwPaginationComponent,
     CarRentComponent,
-    UserCardComponent
+    UserCardComponent,
+    CommentListComponent
 
   ],
   imports: [
@@ -64,9 +68,10 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     MatDatepickerModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
+    RatingModule,
     TooltipModule.forRoot()
   ],
-  providers: [UserService, CarService, DatePipe],
+  providers: [UserService, CarService, DatePipe, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

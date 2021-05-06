@@ -1,23 +1,52 @@
 <div class="container">
   <div class="center">
-  <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
-    <img [src]="car.photo" height="330" *ngIf="car.photo">
+    <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
+      <img [src]="car.photo" height="330" *ngIf="car.photo">
+    </div>
+
+    <p>Car brand: {{car.brand}}</p>
+    <p>Car model: {{car.model}}</p>
+    <p>Fabrication year: {{car.fabricationYear}}</p>
+    <p>Number of doors : {{car.doors}}</p>
+    <p>Number of seats : {{car.seats}}</p>
+    <p>Gearbox : {{car.gearbox}}</p>
+    <p>Fuel Type : {{car.fuelType}}</p>
+    <p>Horse power : {{car.horsePower}}</p>
+    <p>Color : {{car.color}}</p>
+    <p>Conditional air : {{car.conditionalAir}}</p>
+    <p>Luggage volume : {{car.luggageCarrierVolume}}</p>
+    <p>Insurance : {{car.insurance}} €</p>
+    <h2>{{car.pricePerDay}} € per day</h2>
+    <button (click)="redirectToCarRent(car.vehicleIdentificationNumber)">Rent</button>
+    <button *ngIf="currentUser.userRole === 'ADMIN_ROLE'" (click)="editCar(car.vehicleIdentificationNumber)">Edit
+    </button>
   </div>
 
-  <p >Car brand: {{car.brand}}</p>
-  <p >Car model: {{car.model}}</p>
-  <p >Fabrication year: {{car.fabricationYear}}</p>
-  <p >Number of doors : {{car.doors}}</p>
-  <p >Number of seats : {{car.seats}}</p>
-  <p >Gearbox : {{car.gearbox}}</p>
-  <p >Fuel Type : {{car.fuelType}}</p>
-  <p >Horse power : {{car.horsePower}}</p>
-  <p >Color : {{car.color}}</p>
-  <p >Conditional air : {{car.conditionalAir}}</p>
-  <p >Luggage volume : {{car.luggageCarrierVolume}}</p>
-  <p >Insurance : {{car.insurance}} €</p>
-  <h2 >{{car.pricePerDay}} € per day</h2>
-  <button (click)="redirectToCarRent(car.vehicleIdentificationNumber)">Rent</button>
-    <button *ngIf="currentUser.userRole === 'ADMIN_ROLE'" (click)="editCar(car.vehicleIdentificationNumber)">Edit</button>
+  <div style="text-align:left">
+    <h4>
+     Comment and rate the car
+    </h4>
+    <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+  </div>
+<br>
+
+  <div *ngIf="currentUser != undefined">
+    <label for="comment">Add comment</label>
+    <br>
+    <textarea id="comment" [(ngModel)]="carComment"></textarea>
+    <button (click)="addComment()">Add</button>
+  </div>
+
+  <div>
+    <h4>Comment list:</h4>
+    <div class="comment-list" *ngFor="let comment of commentList">
+      <div class="center container-comment">
+        <p style=" font-weight: bold;" class="margin">{{comment.authorEmail}} :</p>
+        <p class="margin">{{comment.rating}}/5</p>
+        <p class="margin">{{comment.text}}</p>
+      </div>
+    </div>
   </div>
 </div>
+
+

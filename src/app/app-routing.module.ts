@@ -14,6 +14,7 @@ import {CarDetailsComponent} from './components/car-details/car-details.componen
 import {CarEditComponent} from './components/car-edit/car-edit.component';
 import {CarRentComponent} from './components/car-rent/car-rent.component';
 import {UserCardComponent} from './components/user-card/user-card.component';
+import {CommentListComponent} from './components/comment-list/comment-list.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,10 @@ const routes: Routes = [
   {
     path: 'profile/edit/card',
     component: UserCardComponent
+  },
+  {
+    path: 'comments',
+    component: CommentListComponent
   },
   {
     path: 'profile/edit/picture',
