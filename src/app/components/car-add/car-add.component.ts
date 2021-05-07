@@ -84,9 +84,9 @@ export class CarAddComponent implements OnInit {
   onSubmit(formData) {
     this.successMessage = '';
     this.errorMessage = '';
-    this.car = new Car(0, formData.vehicleIdentificationNumber, formData.brand, formData.model, formData.doors, formData.seats,
-      formData.fabricationYear, formData.gearbox, formData.pricePerDay, formData.insurance, formData.horsePower, formData.hexColor,
-      formData.color, formData.conditionalAir, formData.fuelType, formData.luggageCarrierVolume, this.fileToUpload);
+    this.car = new Car(0, formData.vehicleIdentificationNumber, this.formGroup.brand, formData.model, formData.doors, formData.seats,
+      formData.fabricationYear,  this.formGroup.gearbox, formData.pricePerDay, formData.insurance, formData.horsePower, formData.hexColor,
+      this.formGroup.color, formData.conditionalAir, this.formGroup.fuelType, formData.luggageCarrierVolume, this.fileToUpload);
     console.log('car to add', this.car);
     this.carService.addCar(this.car).subscribe(data => {
         console.log('DONE', data);

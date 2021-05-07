@@ -21,7 +21,79 @@
     <button (click)="findCarsByDate()">Search</button>
   </div>
 </div>
-<div class="car-list" *ngFor="let car of carList | paginate: config">
+<br>
+<br>
+
+<button (click)="toggleFilter()">Filter</button>
+<div *ngIf="filterToggle" class="container">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+    <div class="form-group on-same-line">
+      <label>Brand:</label>
+      <select class="form-control" (change)="changeBrand(brand.value)" #brand>
+        <option style=" width: auto !important;" *ngFor="let brand of brandList">{{brand}}</option>
+      </select>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label>Model:</label>
+      <select class="form-control" (change)="changeModel(model.value)" #model>
+        <option style=" width: auto !important;" *ngFor="let model of modelList">{{model}}</option>
+      </select>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="seats">Seats</label>
+      <input type="number" class="form-control" id="seats"
+             formControlName="seats"
+             min="1" max="10"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="fabricationYear">Fabrication Year</label>
+      <input type="number" class="form-control" id="fabricationYear" formControlName="fabricationYear"
+             min="1995" max="2021"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="priceIntervalMin">Price min</label>
+      <input type="number" class="form-control" id="priceIntervalMin"
+             formControlName="priceIntervalMin"
+             min="1" max="1000"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="priceIntervalMax">Price max</label>
+      <input type="number" class="form-control" id="priceIntervalMax"
+             formControlName="priceIntervalMax"
+             min="1" max="1000"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label>Conditional Air:</label>
+      <div class="on-same-line">
+        <input id="conditionalAirBoth" type="radio" value="both" name="conditionalAir" formControlName="conditionalAir"
+               [value]=null>
+        <label for="conditionalAirBoth">Both</label>
+      </div>
+
+      <div class="on-same-line">
+        <input id="conditionalAirNo" type="radio" value="no" name="conditionalAir" formControlName="conditionalAir"
+               [value]=false>
+        <label for="conditionalAirNo">No</label>
+      </div>
+
+      <div class="on-same-line">
+        <input id="conditionalAirYes" type="radio" value="yes" name="conditionalAir" formControlName="conditionalAir"
+               [value]=true>
+        <label for="conditionalAirYes">Yes</label>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Search</button>
+
+  </form>
+</div>
+<div class="car-list" *ngFor="let car of carListFiltered | paginate: config">
   <div class="center">
     <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
       <img [src]="car.photo" height="330" *ngIf="car.photo">

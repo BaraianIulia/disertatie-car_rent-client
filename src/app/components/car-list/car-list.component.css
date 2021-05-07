@@ -39,3 +39,8 @@ button:hover {
   background-color: #9a9da0;
 }
 
+.on-same-line{
+  display: inline-block;
+  width: 200px;
+  margin-left: 25px;
+}
