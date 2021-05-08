@@ -6,6 +6,7 @@ import {CarService} from '../../services/car.service';
 import {Comment} from '../../models/comment.model';
 import {CommentService} from '../../services/comment.service';
 import {StarRatingComponent} from 'ng-starrating';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-car-details',
@@ -23,7 +24,7 @@ export class CarDetailsComponent implements OnInit {
   private rating = 5;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
-              private carService: CarService, private commentService: CommentService) {
+              private carService: CarService, private commentService: CommentService, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -68,6 +69,7 @@ export class CarDetailsComponent implements OnInit {
         (res1) => {
           console.log('Done', res1);
           this.carComment = '';
+          this.alertService.success('Rețetă adăugată');
         }
       );
   }

@@ -32,6 +32,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import {CommentService} from './services/comment.service';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { RatingModule } from 'ng-starrating';
+import { AlertComponent } from './components/alert/alert.component';
+import {AlertService} from './services/alert.service';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { RatingModule } from 'ng-starrating';
     JwPaginationComponent,
     CarRentComponent,
     UserCardComponent,
-    CommentListComponent
+    CommentListComponent,
+    AlertComponent
 
   ],
   imports: [
@@ -71,7 +74,7 @@ import { RatingModule } from 'ng-starrating';
     RatingModule,
     TooltipModule.forRoot()
   ],
-  providers: [UserService, CarService, DatePipe, CommentService],
+  providers: [UserService, CarService, DatePipe, CommentService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
