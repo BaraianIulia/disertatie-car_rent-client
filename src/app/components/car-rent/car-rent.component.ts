@@ -7,6 +7,7 @@ import {Card} from '../../models/card.model';
 import {CardService} from '../../services/card.service';
 import {OrderDetail} from '../../models/orderDetail.model';
 import {OrderService} from '../../services/order.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-car-rent',
@@ -31,7 +32,8 @@ export class CarRentComponent implements OnInit {
   disabledBtn = true;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
-              private carService: CarService, private cardService: CardService, private orderService: OrderService) {
+              private carService: CarService, private cardService: CardService, private orderService: OrderService,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -164,5 +166,9 @@ export class CarRentComponent implements OnInit {
         console.log(error);
       }));
     }
+  }
+
+  backClicked() {
+    this.location.back();
   }
 }

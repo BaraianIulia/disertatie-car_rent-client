@@ -126,4 +126,17 @@ export class CarListComponent implements OnInit {
     console.log('Model change ' + this.formGroup.model + ' -> ' + model);
     this.formGroup.model = model;
   }
+
+  resetFilter() {
+    this.formGroup = this.formBuilder.group({
+      brand: '',
+      model: '',
+      seats: '',
+      fabricationYear: '',
+      priceIntervalMin: '',
+      priceIntervalMax: '',
+      conditionalAir: null,
+    });
+    this.carListFiltered = this.carList;
+  }
 }

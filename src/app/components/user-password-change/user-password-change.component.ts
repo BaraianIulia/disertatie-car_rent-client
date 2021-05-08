@@ -5,6 +5,8 @@ import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {CurrentUser} from '../../models/currentUser.model';
 
+import {Location, ViewportScroller} from '@angular/common';
+
 @Component({
   selector: 'app-user-password-change',
   templateUrl: './user-password-change.component.html',
@@ -16,7 +18,8 @@ export class UserPasswordChangeComponent implements OnInit {
   title = 'Change password';
   formGroup;
 
-  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -36,6 +39,11 @@ export class UserPasswordChangeComponent implements OnInit {
         this.router.navigate(['/profile']);
       });
     }
+  }
+
+
+  backClicked() {
+    this.location.back();
   }
 }
 

@@ -7,6 +7,9 @@ import {FormBuilder} from '@angular/forms';
 import {Card} from '../../models/card.model';
 import {CardService} from '../../services/card.service';
 
+import {Location, ViewportScroller} from '@angular/common';
+import {AlertService} from '../../services/alert.service';
+
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
@@ -21,7 +24,8 @@ export class UserCardComponent implements OnInit {
   emptyListMessage = 'The list is empty';
   private card: Card;
 
-  constructor(private cardService: CardService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private cardService: CardService, private router: Router, private formBuilder: FormBuilder,
+              private scroll: ViewportScroller, private location: Location, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -54,9 +58,12 @@ export class UserCardComponent implements OnInit {
     this.cardService.addCard(this.card).subscribe(data => {
         console.log('DONE', data);
         this.cardList.push(data);
+        this.alertService.success('Card added with success');
+        this.scrollToTop();
       },
       error => {
-        console.log(error);
+        this.alertService.error(error.error.message);
+        this.scrollToTop();
       });
   }
 
@@ -65,10 +72,22 @@ export class UserCardComponent implements OnInit {
         console.log('DONE', data);
         const index = this.cardList.findIndex(x => x.id === id);
         this.cardList.splice(index, 1);
+        this.alertService.success('Card deleted with success');
+        this.scrollToTop();
       },
       error => {
-        console.log(error);
+        this.alertService.error(error.error.message);
+        this.scrollToTop();
       });
   }
+
+
+  backClicked() {
+    this.location.back();
+  }
+  scrollToTop() {
+    this.scroll.scrollToPosition([0, 0]);
+  }
+
 }
 

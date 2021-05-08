@@ -78,6 +78,7 @@ const routes: Routes = [
     path: 'profile/edit/picture',
     component: UserProfilePictureChangeComponent
   },
+  { path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({

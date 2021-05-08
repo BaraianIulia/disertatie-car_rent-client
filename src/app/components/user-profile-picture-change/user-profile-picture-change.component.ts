@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
+import {Location, ViewportScroller} from '@angular/common';
 
 @Component({
   selector: 'app-user-profile-picture-change',
@@ -16,9 +17,9 @@ export class UserProfilePictureChangeComponent implements OnInit {
   currentUser;
   user;
   filtersLoaded: Promise<boolean>;
-  title = 'Change your profile picture'
+  title = 'Change your profile picture';
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private location: Location) {
   }
 
   ngOnInit() {
@@ -52,5 +53,10 @@ export class UserProfilePictureChangeComponent implements OnInit {
       console.log('poza incarcata');
       console.log(this.fileToUpload);
     };
+  }
+
+
+  backClicked() {
+    this.location.back();
   }
 }

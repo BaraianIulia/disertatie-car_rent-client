@@ -22,17 +22,16 @@
           <li class="nav-item"><a class="not-active nav-item" routerLink="comments" href="#">Manage Comments</a></li>
         </ul>
       </div>
-      <li class="nav-item">
-        <a *ngIf="currentUser === null" class="nav-link" href="#" routerLink="login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a *ngIf="currentUser !== null" (click)="logout()" class="nav-link" href="#">Logout</a>
-      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item">
         <a *ngIf="currentUser !== null" class="nav-link" href="#" routerLink="profile">My profile</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">My List</a>
+      <li class="nav-item right">
+        <a *ngIf="currentUser === null" class="nav-link" href="#" routerLink="login">Login</a>
+      </li>
+      <li class="nav-item right">
+        <a *ngIf="currentUser !== null" (click)="logout()" class="nav-link" href="#">Logout</a>
       </li>
     </ul>
   </div>

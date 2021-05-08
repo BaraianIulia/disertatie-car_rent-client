@@ -1,1 +1,67 @@
-<p>home works!</p>
+<carousel [height]="900" [cellsToShow]="1" [transitionTimingFunction]="'ease-in'" [autoplay]="true"
+          [transitionDuration]="500" [loop]="true" [arrowsTheme]="'dark'">
+  <div class="carousel-cell">
+    <img src="assets/images/carousel1.jpg">
+  </div>
+  <div class="carousel-cell">
+    <img src="assets/images/carousel2.jpg">
+  </div>
+  <div class="carousel-cell">
+    <img src="assets/images/carousel3.jpg">
+  </div>
+</carousel>
+<br>
+<br>
+<br>
+<div class="container">
+  <h4>Rent a car in Cluj-Napoca</h4>
+  <h6>why choose us?</h6>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>  <img src="assets/images/fialprice.PNG"></th>
+      <th>  <img src="assets/images/benefits.PNG"></th>
+      <th>  <img src="assets/images/location.PNG"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <td>Displayed price = Final price. No hidden fees!</td>
+    <td>The price includes VAT, RCA, Helmet, Winter Tires</td>
+    <td>Free delivery and pick-up at any time at Cluj-Napoca Airport</td>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="car-list" *ngFor="let car of carList | slice:0:3">
+  <div class="center">
+    <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
+      <img [src]="car.photo" height="330" *ngIf="car.photo">
+    </div>
+    <p>Car brand: {{car.brand}}</p>
+    <p>Car model: {{car.model}}</p>
+    <p>Fabrication year: {{car.fabricationYear}}</p>
+    <h2>{{car.pricePerDay}} €</h2>
+    <button (click)="redirectToCarDetails(car.vehicleIdentificationNumber)">Open</button>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th> Contact us</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td> <img src="assets/images/phone.PNG"> +40 (743) 526 653 <br>
+      <img src="assets/images/mail.PNG"> rentCarClujNapoca@gmail.com</td>
+    </tbody>
+  </table>
+</div>

@@ -4,6 +4,8 @@ import {FormBuilder} from '@angular/forms';
 import {Car} from '../../models/car.model';
 import {CarService} from '../../services/car.service';
 import {User} from '../../models/user.model';
+import {Location, ViewportScroller} from '@angular/common';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-car-add',
@@ -28,7 +30,8 @@ export class CarAddComponent implements OnInit {
   private currentUser: User;
 
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private carService: CarService) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private carService: CarService,
+              private location: Location, private scroll: ViewportScroller, private alertService: AlertService) {
     this.formGroup = this.formBuilder.group({
       vehicleIdentificationNumber: '',
       brand: 'BMW',
@@ -84,18 +87,20 @@ export class CarAddComponent implements OnInit {
   onSubmit(formData) {
     this.successMessage = '';
     this.errorMessage = '';
-    this.car = new Car(0, formData.vehicleIdentificationNumber, this.formGroup.brand, formData.model, formData.doors, formData.seats,
-      formData.fabricationYear,  this.formGroup.gearbox, formData.pricePerDay, formData.insurance, formData.horsePower, formData.hexColor,
-      this.formGroup.color, formData.conditionalAir, this.formGroup.fuelType, formData.luggageCarrierVolume, this.fileToUpload);
+    this.car = new Car(0, formData.vehicleIdentificationNumber, formData.brand, formData.model, formData.doors, formData.seats,
+      formData.fabricationYear, formData.gearbox, formData.pricePerDay, formData.insurance, formData.horsePower, formData.hexColor,
+      formData.color, formData.conditionalAir, formData.fuelType, formData.luggageCarrierVolume, this.fileToUpload);
     console.log('car to add', this.car);
     this.carService.addCar(this.car).subscribe(data => {
         console.log('DONE', data);
         this.clear();
-        this.successMessage = 'Vehicle saved with success.';
+        this.alertService.success('Vehicle saved with success.');
+        this.scrollToTop();
       },
       error => {
         console.log(error);
-        this.errorMessage = 'Vehicle could not be saved';
+        this.alertService.error(error.error.message);
+        this.scrollToTop();
       });
   }
 
@@ -131,4 +136,12 @@ export class CarAddComponent implements OnInit {
     };
   }
 
+
+  backClicked() {
+    this.location.back();
+  }
+
+  scrollToTop() {
+    this.scroll.scrollToPosition([0, 0]);
+  }
 }

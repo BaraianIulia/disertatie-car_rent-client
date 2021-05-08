@@ -5,6 +5,9 @@ import {Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 import {CurrentUser} from '../../models/currentUser.model';
 
+import {Location, ViewportScroller} from '@angular/common';
+
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
@@ -19,7 +22,8 @@ export class UserEditComponent implements OnInit {
   private user: User;
   filtersLoaded: Promise<boolean>;
 
-  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -51,5 +55,10 @@ export class UserEditComponent implements OnInit {
       this.router.navigate(['/profile']);
     });
   }
+
+  backClicked() {
+    this.location.back();
+  }
+
 }
 

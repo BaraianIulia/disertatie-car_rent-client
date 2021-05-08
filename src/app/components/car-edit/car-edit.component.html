@@ -126,14 +126,12 @@
     <input id="file" #file type="file" (change)="handleFileInput($event)"/>
     <br>
     <br>
-    <img [src]="imgURL" *ngIf="imgURL">
+    <img [src]="imgURL" height="200" *ngIf="imgURL">
 
     <br>
     <br>
     <button class="btn btn-primary" type="submit">Edit</button>
+    <button class="btn btn-primary" (click)="backClicked()">Back</button>
     <br>
-    <br>
-    <label class="alert-success">{{successMessage}}</label>
-    <label class="alert-danger">{{errorMessage}}</label>
   </form>
 </div>

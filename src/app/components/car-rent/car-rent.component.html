@@ -20,7 +20,7 @@
       <label>Start date</label>
       <br>
       <mat-form-field>
-        <input matInput [matDatepicker]="pickerStart" (dateChange)="onChangeStartEvent($event)">
+        <input style="color: white" matInput [matDatepicker]="pickerStart" (dateChange)="onChangeStartEvent($event)">
         <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
         <mat-datepicker #pickerStart></mat-datepicker>
       </mat-form-field>
@@ -28,8 +28,8 @@
     <div class="form-group">
       <label>End date</label>
       <br>
-      <mat-form-field>
-        <input matInput [matDatepicker]="pickerEnd" (dateChange)="onChangeEndEvent($event)">
+      <mat-form-field >
+        <input  style="color: white" matInput [matDatepicker]="pickerEnd" (dateChange)="onChangeEndEvent($event)">
         <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
         <mat-datepicker #pickerEnd></mat-datepicker>
       </mat-form-field>
@@ -122,6 +122,7 @@
 
 
     <button class="btn btn-primary" [disabled]="!disabledBtn" type="submit">Rent</button>
+    <button class="btn btn-primary" (click)="backClicked()">Back</button>
     <br>
     <br>
   </form>

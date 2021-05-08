@@ -11,15 +11,16 @@
 
 
   <form (ngSubmit)="onSubmit()">
-      <label for="file">Pick a new photo for your account</label>
-      <input id="file" #file type="file" (change)="handleFileInput($event)"/>
-      <br>
-      <br>
-      <img [src]="imgURL" height="200" *ngIf="imgURL">
+    <label for="file">Pick a new photo for your account</label>
+    <input id="file" #file type="file" (change)="handleFileInput($event)"/>
+    <br>
+    <br>
+    <img [src]="imgURL" height="200" *ngIf="imgURL">
 
-      <br>
-      <br>
+    <br>
+    <br>
 
-      <button class="btn btn-primary" type="submit">Change picture</button>
-    </form>
+    <button class="btn btn-primary" type="submit">Change picture</button>
+    <button class="btn btn-primary" (click)="backClicked()">Back</button>
+  </form>
 </div>

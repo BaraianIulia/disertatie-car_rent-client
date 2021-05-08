@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
 import {CarService} from '../../services/car.service';
 import {User} from '../../models/user.model';
+import {Location, ViewportScroller} from '@angular/common';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-car-edit',
@@ -30,7 +32,8 @@ export class CarEditComponent implements OnInit {
 
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
-              private carService: CarService) {
+              private carService: CarService, private location: Location, private alertService: AlertService,
+              private scroll: ViewportScroller) {
   }
 
   ngOnInit() {
@@ -87,11 +90,13 @@ export class CarEditComponent implements OnInit {
     this.carService.editCar(this.car).subscribe(data => {
         console.log('DONE', data);
         this.car = data;
-        this.successMessage = 'Vehicle saved with success.';
+        this.alertService.success('Vehicle edited with success.');
+        this.scrollToTop();
       },
       error => {
         console.log(error);
-        this.errorMessage = 'Vehicle could not be saved';
+        this.alertService.error(error.error.message);
+        this.scrollToTop();
       });
   }
 
@@ -106,6 +111,14 @@ export class CarEditComponent implements OnInit {
       console.log('poza incarcata');
       console.log(this.fileToUpload);
     };
+  }
+
+  backClicked() {
+    this.location.back();
+  }
+
+  scrollToTop() {
+    this.scroll.scrollToPosition([0, 0]);
   }
 
 }

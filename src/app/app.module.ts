@@ -34,6 +34,8 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import { RatingModule } from 'ng-starrating';
 import { AlertComponent } from './components/alert/alert.component';
 import {AlertService} from './services/alert.service';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import {AlertService} from './services/alert.service';
     CarRentComponent,
     UserCardComponent,
     CommentListComponent,
-    AlertComponent
+    AlertComponent,
+    FooterComponent
 
   ],
   imports: [
@@ -72,6 +75,7 @@ import {AlertService} from './services/alert.service';
     MatNativeDateModule,
     BrowserAnimationsModule,
     RatingModule,
+    IvyCarouselModule,
     TooltipModule.forRoot()
   ],
   providers: [UserService, CarService, DatePipe, CommentService, AlertService],
