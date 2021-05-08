@@ -7,6 +7,7 @@ import {Comment} from '../../models/comment.model';
 import {CommentService} from '../../services/comment.service';
 import {StarRatingComponent} from 'ng-starrating';
 import {AlertService} from '../../services/alert.service';
+import {ViewportScroller} from '@angular/common';
 
 @Component({
   selector: 'app-car-details',
@@ -24,7 +25,8 @@ export class CarDetailsComponent implements OnInit {
   private rating = 5;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
-              private carService: CarService, private commentService: CommentService, private alertService: AlertService) {
+              private carService: CarService, private commentService: CommentService, private alertService: AlertService,
+              private scroll: ViewportScroller) {
   }
 
   ngOnInit() {
@@ -69,7 +71,8 @@ export class CarDetailsComponent implements OnInit {
         (res1) => {
           console.log('Done', res1);
           this.carComment = '';
-          this.alertService.success('Rețetă adăugată');
+          this.alertService.success('Comment and rating added with success. Wait for admin approval.');
+          this.scrollToTop();
         }
       );
   }
@@ -77,4 +80,9 @@ export class CarDetailsComponent implements OnInit {
   onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
     this.rating = $event.newValue;
   }
+
+  scrollToTop() {
+    this.scroll.scrollToPosition([0, 0]);
+  }
+
 }
