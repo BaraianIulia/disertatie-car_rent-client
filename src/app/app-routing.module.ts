@@ -15,6 +15,7 @@ import {CarEditComponent} from './components/car-edit/car-edit.component';
 import {CarRentComponent} from './components/car-rent/car-rent.component';
 import {UserCardComponent} from './components/user-card/user-card.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
+import {RentConfirmedComponent} from './components/rent-confirmed/rent-confirmed.component';
 
 
 const routes: Routes = [
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path: 'profile/edit/picture',
     component: UserProfilePictureChangeComponent
+  },
+  {
+    path: 'rent/success',
+    component: RentConfirmedComponent
   },
   { path: '**', redirectTo: 'home'}
 ];

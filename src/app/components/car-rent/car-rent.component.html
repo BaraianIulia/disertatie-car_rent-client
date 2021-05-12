@@ -35,6 +35,9 @@
       </mat-form-field>
     </div>
 
+    <label class="alert-success">{{successMessage}}</label>
+    <label class="alert-danger">{{errorMessage}}</label>
+
     <div class="form-group">
       <label for="insurance">Insurance</label>
       <button style="float: right" tooltip="Insurance value for the car" placement="top">?</button>
@@ -48,9 +51,6 @@
       <input ngModel="{{totalPrice}}" type="text" class="form-control" id="totalPrice"
              placeholder="Pick the dates" formControlName="totalPrice"/>
     </div>
-
-    <label class="alert-success">{{successMessage}}</label>
-    <label class="alert-danger">{{errorMessage}}</label>
 
     <div class="form-group">
       <label>Pay Method:</label>

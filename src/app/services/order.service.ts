@@ -15,6 +15,7 @@ export class OrderService {
 
 
   rentCar(orderDetail: OrderDetail) {
+    console.log('orderdetail: ', orderDetail);
     return this.http.post(`${this.uri}/add`, orderDetail);
   }
 }

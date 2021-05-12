@@ -36,6 +36,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import {AlertService} from './services/alert.service';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { FooterComponent } from './components/footer/footer.component';
+import { RentConfirmedComponent } from './components/rent-confirmed/rent-confirmed.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { FooterComponent } from './components/footer/footer.component';
     UserCardComponent,
     CommentListComponent,
     AlertComponent,
-    FooterComponent
+    FooterComponent,
+    RentConfirmedComponent
 
   ],
   imports: [

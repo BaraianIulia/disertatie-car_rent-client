@@ -7,7 +7,8 @@ import {Card} from '../../models/card.model';
 import {CardService} from '../../services/card.service';
 import {OrderDetail} from '../../models/orderDetail.model';
 import {OrderService} from '../../services/order.service';
-import {Location} from '@angular/common';
+import {Location, ViewportScroller} from '@angular/common';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-car-rent',
@@ -33,11 +34,14 @@ export class CarRentComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
               private carService: CarService, private cardService: CardService, private orderService: OrderService,
-              private location: Location) {
+              private location: Location, private alertService: AlertService, private scroll: ViewportScroller) {
   }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.currentUser === null || this.currentUser === undefined) {
+      this.router.navigate(['/login']);
+    }
     console.log('current user' + this.currentUser.id);
     this.activatedRoute.params.subscribe(params => {
       console.log('vin ' + params.vin);
@@ -127,9 +131,10 @@ export class CarRentComponent implements OnInit {
     }
     console.log(this.orderDetail);
     this.orderService.rentCar(this.orderDetail).subscribe((res) => {
-      console.log('created with succes');
+      this.router.navigate(['/rent/success']);
     }, (error => {
-      console.log(error);
+      this.alertService.error(error.error.message);
+      this.scrollToTop();
     }));
   }
 
@@ -170,5 +175,8 @@ export class CarRentComponent implements OnInit {
 
   backClicked() {
     this.location.back();
+  }
+  scrollToTop() {
+    this.scroll.scrollToPosition([0, 0]);
   }
 }
