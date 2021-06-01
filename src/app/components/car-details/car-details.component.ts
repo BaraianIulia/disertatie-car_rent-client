@@ -23,6 +23,7 @@ export class CarDetailsComponent implements OnInit {
   commentList: Comment[];
   private comment: Comment;
   private rating = 5;
+  title = 'Car details';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
               private carService: CarService, private commentService: CommentService, private alertService: AlertService,
@@ -65,7 +66,7 @@ export class CarDetailsComponent implements OnInit {
 
   addComment() {
     console.log('comment', this.carComment);
-    this.comment = new Comment(0, this.car.id, this.carComment, this.currentUser.name, this.currentUser.email, null, this.rating);
+    this.comment = new Comment(0, this.car.id, this.carComment, this.currentUser.name, this.currentUser.email, null, this.rating, null);
     this.commentService.addComment(this.comment)
       .subscribe(
         (res1) => {

@@ -16,6 +16,8 @@ import {CarRentComponent} from './components/car-rent/car-rent.component';
 import {UserCardComponent} from './components/user-card/user-card.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
 import {RentConfirmedComponent} from './components/rent-confirmed/rent-confirmed.component';
+import {CarQuizzComponent} from './components/car-quizz/car-quizz.component';
+import {NavigationComponent} from './components/navigation/navigation.component';
 
 
 const routes: Routes = [
@@ -38,6 +40,10 @@ const routes: Routes = [
   {
     path: 'cars/:id',
     component: CarListComponent
+  },
+  {
+    path: 'car/quizz/:id',
+    component: CarQuizzComponent
   },
   {
     path: 'car/add',
@@ -82,6 +88,10 @@ const routes: Routes = [
   {
     path: 'rent/success',
     component: RentConfirmedComponent
+  },
+  {
+    path: 'navigate',
+    component: NavigationComponent
   },
   { path: '**', redirectTo: 'home'}
 ];

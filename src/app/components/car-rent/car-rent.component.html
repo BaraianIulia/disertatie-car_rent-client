@@ -13,8 +13,38 @@
 
     <div class="form-group">
       <label>Pick-up and drop-off location: </label>
-     <p>{{this.pickupAndDropoffLocation}}</p>
     </div>
+    <div class="form-group">
+      <label >Country:</label>
+      <button style="float: right" tooltip="Select country for the pick-up and drop-off" placement="top">?</button>
+      <select class="form-control" (change)="changeCountry(country.value)" #country>
+        <option style=" width: auto !important;" *ngFor="let country of countryList">{{country}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label >City:</label>
+      <button style="float: right" tooltip="Select for the pick-up and drop-off" placement="top">?</button>
+      <select class="form-control" (change)="changeCity(city.value)" #city>
+        <option style=" width: auto !important;" *ngFor="let city of cityList">{{city}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pickup">Pick-up Location</label>
+      <button style="float: right" tooltip="Write the address of the pick-up" placement="top">?</button>
+      <input type="text" class="form-control" id="pickup"
+             placeholder="Adress Street Number (Capsunilor, 4)" formControlName="pickup"/>
+    </div>
+
+    <div class="form-group">
+      <label for="dropoff">Drop-off Location</label>
+      <button style="float: right" tooltip="Write the address of the drop-off" placement="top">?</button>
+      <input type="text" class="form-control" id="dropoff"
+             placeholder="Adress Street Number (Cojocnei, 8)" formControlName="dropoff"/>
+    </div>
+
+
 
     <div class="form-group">
       <label>Start date</label>

@@ -26,11 +26,17 @@ export class CarRentComponent implements OnInit {
   public endDate: Date;
   public totalPrice;
   public cardList: Card[];
-  pickupAndDropoffLocation = 'AEROPORT CLUJ, CLUJ-NAPOCA, ROMANIA';
+  countryList = ['Germany', 'Romania', 'Czech Republic', 'Belgium'];
+  cityGermanyList = ['Berlin', 'Hamburg', 'Munich'];
+  cityRomaniaList = ['Bucharest', 'Cluj-Napoca', 'Oradea'];
+  cityCzechList = ['Brno', 'Ostrava', 'Prague'];
+  cityBelgiumList = ['Bruxelles', 'Peer', 'Virton'];
+  pickupAndDropoffLocation = '';
   private orderDetail: OrderDetail;
   private errorMessage = '';
   private successMessage = '';
   disabledBtn = true;
+  private cityList: string[];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
               private carService: CarService, private cardService: CardService, private orderService: OrderService,
@@ -42,6 +48,7 @@ export class CarRentComponent implements OnInit {
     if (this.currentUser === null || this.currentUser === undefined) {
       this.router.navigate(['/login']);
     }
+    this.cityList = this.cityGermanyList;
     console.log('current user' + this.currentUser.id);
     this.activatedRoute.params.subscribe(params => {
       console.log('vin ' + params.vin);
@@ -67,6 +74,10 @@ export class CarRentComponent implements OnInit {
               cardholderName: new FormControl('', Validators.required),
               expirationDate: new FormControl('', Validators.required),
               cvvCodeNew: new FormControl('', Validators.required),
+              country: new FormControl({value: 'Germany', disabled: true}, Validators.required),
+              city: new FormControl({value: 'Berlin', disabled: true}, Validators.required),
+              pickup: new FormControl('', Validators.required),
+              dropoff: new FormControl('', Validators.required),
             });
             this.imgURL = this.car.photo;
           }
@@ -109,6 +120,15 @@ export class CarRentComponent implements OnInit {
     console.log('rent the car');
     console.log('formdata ', formData);
     console.log(this.car);
+    if (this.formGroup.value.country === undefined) {
+      this.formGroup.value.country = 'Germany';
+    }
+    if (this.formGroup.value.city === undefined) {
+      this.formGroup.value.city = 'Berlin';
+    }
+    this.pickupAndDropoffLocation = this.formGroup.value.country + ', ' + this.formGroup.value.city + ', pick-up: '
+      + formData.pickup + ', drop-off: ' + formData.dropoff;
+    console.log(this.pickupAndDropoffLocation);
     if (formData.payMethod === 'card') {
       this.orderDetail = new OrderDetail(this.currentUser.id, this.car.id,
         null,
@@ -176,7 +196,30 @@ export class CarRentComponent implements OnInit {
   backClicked() {
     this.location.back();
   }
+
   scrollToTop() {
     this.scroll.scrollToPosition([0, 0]);
+  }
+
+  changeCountry(country: string) {
+    this.formGroup.value.country = country;
+    switch (country) {
+      case 'Germany':
+        this.cityList = this.cityGermanyList;
+        break;
+      case 'Romania':
+        this.cityList = this.cityRomaniaList;
+        break;
+      case 'Belgium':
+        this.cityList = this.cityBelgiumList;
+        break;
+      case 'Czech Republic':
+        this.cityList = this.cityCzechList;
+        break;
+    }
+  }
+
+  changeCity(city: string) {
+    this.formGroup.value.city = city;
   }
 }

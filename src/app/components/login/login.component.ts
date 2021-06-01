@@ -25,6 +25,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.currentUser !== null && this.currentUser !== undefined) {
+      this.router.navigate(['/home']);
+    }
   }
 
   onSubmit(formData) {
@@ -36,7 +40,8 @@ export class LoginComponent implements OnInit {
         console.log('user', res);
         this.currentUser = new CurrentUser(res.id, res.name, res.surname, res.email, res.userRole);
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-        this.router.navigateByUrl('/home');
+        window.location.reload();
+        this.router.navigate(['/home']);
       },
       (err) => {
         console.log('error', err);

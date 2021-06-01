@@ -1,4 +1,7 @@
 <div class="container">
+  <h1 class="form-title">
+    {{title}}
+  </h1>
   <div class="center">
     <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
       <img [src]="car.photo" height="330" *ngIf="car.photo">
@@ -45,6 +48,7 @@
     <h4>Comment list:</h4>
     <div class="comment-list" *ngFor="let comment of commentList">
       <div class="center container-comment">
+        <p class="margin">{{comment.created}}</p>
         <p style=" font-weight: bold;" class="margin">{{comment.authorEmail}} :</p>
         <p class="margin">{{comment.rating}}/5</p>
         <p class="margin">{{comment.text}}</p>

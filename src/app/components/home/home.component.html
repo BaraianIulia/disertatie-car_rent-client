@@ -1,3 +1,7 @@
+
+<h1 class="form-title" *ngIf="this.currentUser !== null && this.currentUser !== undefined">Welcome, {{this.currentUser.name}}!</h1>
+<h1  class="form-title" *ngIf="this.currentUser == null && this.currentUser == undefined">Welcome!</h1>
+
 <carousel [height]="900" [cellsToShow]="1" [transitionTimingFunction]="'ease-in'" [autoplay]="true"
           [transitionDuration]="500" [loop]="true" [arrowsTheme]="'dark'">
   <div class="carousel-cell">

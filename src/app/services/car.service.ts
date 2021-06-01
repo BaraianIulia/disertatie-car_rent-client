@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Car} from '../models/car.model';
 import {DatePipe} from '@angular/common';
+import {CarQuizz} from '../models/carQuizz.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,9 @@ export class CarService {
       .set('endDate', this.datepipe.transform(endDate, 'yyyy-MM-dd'));
     console.log('getAllCars', params);
     return this.http.get<boolean>(`${this.uri}/availability`, {params});
+  }
+
+  getQuizzCar(carId: number, carQuizzModel: CarQuizz) {
+    return this.http.post<Car[]>(`${this.uri}/quizz/` + carId, carQuizzModel);
   }
 }

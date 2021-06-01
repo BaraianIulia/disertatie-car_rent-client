@@ -10,10 +10,12 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   private carList: Car[];
+  private currentUser: any;
 
   constructor( private router: Router, private carService: CarService) { }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.carService.getAllCars(null, null)
       .subscribe(
         (res) => {

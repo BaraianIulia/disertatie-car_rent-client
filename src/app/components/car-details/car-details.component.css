@@ -4,6 +4,7 @@
   border: medium groove;
   position: relative;
   border-radius: 5px;
+  font-family: Brush Script MT, Brush Script Std, cursive;
 }
 
 .center{
@@ -17,7 +18,12 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
+.form-title{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: black;
 
+}
 button {
   margin: 2% 2% 2% 70%;
   color: #9a9da0;

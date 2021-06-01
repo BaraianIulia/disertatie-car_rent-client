@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   private reader: FileReader;
   private imgURL: string | ArrayBuffer;
   private fileToUpload;
+  // maxDate = (new Date(Date.now())).setFullYear((new Date(Date.now())).getFullYear() - 18);
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({

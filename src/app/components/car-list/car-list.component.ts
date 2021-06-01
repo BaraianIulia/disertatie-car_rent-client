@@ -83,6 +83,7 @@ export class CarListComponent implements OnInit {
 
   onSubmit(formData) {
     this.carListFiltered = this.carList;
+    console.log(this.carListFiltered);
     console.log('filter after ', this.formGroup.brand );
     if (this.formGroup.brand !== undefined && this.formGroup.brand !== '') {
       this.carListFiltered = this.carListFiltered.filter(x => x.brand === this.formGroup.brand);
@@ -91,25 +92,30 @@ export class CarListComponent implements OnInit {
         this.carListFiltered = this.carListFiltered.filter(x => x.model === this.formGroup.model);
       }
     }
-    console.log('filter after ', formData.seats);
+    console.log('filter after S', formData.seats);
     if (formData.seats !== undefined && formData.seats > 0 && formData.seats !== '' && formData.seats !== null) {
+      console.log('filter');
       this.carListFiltered = this.carListFiltered.filter(x => x.seats === formData.seats);
     }
-    console.log('filter after ', formData.fabricationYear);
+    console.log('filter after FA', formData.fabricationYear);
     if (formData.fabricationYear !== undefined && formData.fabricationYear !== '' && formData.fabricationYear !== null) {
+      console.log('filter');
       this.carListFiltered = this.carListFiltered.filter(x => x.fabricationYear === formData.fabricationYear);
     }
-    console.log('filter after ', formData.priceIntervalMax );
+    console.log('filter after PriceMax', formData.priceIntervalMax );
     if (formData.priceIntervalMax !== undefined && formData.priceIntervalMax !== '' && formData.priceIntervalMax !== null) {
+      console.log('filter');
       this.carListFiltered = this.carListFiltered.filter(x => x.pricePerDay < formData.priceIntervalMax );
     }
-    console.log('filter after ', formData.priceIntervalMin);
+    console.log('filter after PriceMIN', formData.priceIntervalMin);
     if (formData.priceIntervalMin !== undefined  && formData.priceIntervalMin !== '' && formData.priceIntervalMin !== null) {
+      console.log('filter');
       this.carListFiltered = this.carListFiltered.filter(x => x.pricePerDay > formData.priceIntervalMin );
     }
-    console.log('filter after ', formData.conditionalAir );
+    console.log('filter after AC', formData.conditionalAir );
     if (formData.conditionalAir !== undefined && formData.conditionalAir !== null) {
-      this.carListFiltered = this.carListFiltered.filter(x => x.conditionalAir > formData.conditionalAir );
+      console.log('filter');
+      this.carListFiltered = this.carListFiltered.filter(x => x.conditionalAir === formData.conditionalAir );
     }
   }
 
