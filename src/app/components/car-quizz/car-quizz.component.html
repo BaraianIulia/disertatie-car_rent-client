@@ -1,0 +1,98 @@
+<br>
+<br>
+<div class="container">
+  <h1 class="form-title">
+    {{title}}
+  </h1>
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+    <div class="form-group">
+      <label for="brandQuestion">{{this.carQuizz[0]}}</label>
+      <div id="brandQuestion" *ngFor="let brand of brandList; let i=index" class="col-md-6">
+        <label>
+          <input type="checkbox" [value]="brand" (change)="onCheckChangeBrand($event)">
+          {{brand}}
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="fabricationYear">{{this.carQuizz[2]}}</label>
+      <input type="number" class="form-control" id="fabricationYear" formControlName="fabricationYear"
+             min="1995" max="2021"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="pricePerDay">{{this.carQuizz[3]}}</label>
+      <input type="number" class="form-control" id="pricePerDay"
+             formControlName="pricePerDay"
+             min="1" max="1000"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="horsePower">{{this.carQuizz[4]}}</label>
+      <input type="number" class="form-control" id="horsePower"
+             formControlName="horsePower"
+             min="1" max="1000"/>
+    </div>
+
+    <div class="form-group on-same-line">
+      <label for="seats">{{this.carQuizz[5]}}</label>
+      <input type="number" class="form-control" id="seats"
+             formControlName="seats"
+             min="1" max="10"/>
+    </div>
+
+    <div class="form-group">
+      <label for="color">{{this.carQuizz[6]}}</label>
+      <div id="color" *ngFor="let color of colorList; let i=index" class="col-md-6">
+        <label>
+          <input type="checkbox" [value]="color" (change)="onCheckChangeColor($event)">
+          {{color}}
+        </label>
+      </div>
+    </div>
+
+    <div class="date-picker">
+      <label>Start date</label>
+      <br>
+      <mat-form-field>
+        <input style="color: white" matInput [matDatepicker]="pickerStart" (dateChange)="onChangeStartEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="date-picker">
+      <label>End date</label>
+      <br>
+      <mat-form-field>
+        <input style="color: white" matInput [matDatepicker]="pickerEnd" (dateChange)="onChangeEndEvent($event)">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Search</button>
+    <button class="btn btn-primary" (click)="backClicked()">Back</button>
+    <br>
+  </form>
+</div>
+<br>
+<br>
+<div class="border">
+<h2  style="margin-left: 10%" class="center">Car List</h2>
+<div class="car-list" *ngFor="let car of carList | paginate: config">
+  <div class="center">
+    <div style="margin-top: 10%" *ngIf="null != car.photo || empty != car.photo || undefined != car.photo">
+      <img [src]="car.photo" height="330" *ngIf="car.photo">
+    </div>
+    <p>Car brand: {{car.brand}}</p>
+    <p>Car model: {{car.model}}</p>
+    <p>Fabrication year: {{car.fabricationYear}}</p>
+    <h2>{{car.pricePerDay}} €</h2>
+    <button (click)="redirectToCarDetails(car.vehicleIdentificationNumber)">Open</button>
+  </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="center"></pagination-controls>
+</div>
