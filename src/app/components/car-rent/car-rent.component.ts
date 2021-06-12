@@ -120,14 +120,20 @@ export class CarRentComponent implements OnInit {
     console.log('rent the car');
     console.log('formdata ', formData);
     console.log(this.car);
-    if (this.formGroup.value.country === undefined) {
+
+    console.log(formData.country);
+    console.log(formData.city);
+    if (formData.country === undefined) {
       this.formGroup.value.country = 'Germany';
     }
-    if (this.formGroup.value.city === undefined) {
+
+    if (formData.city === undefined) {
       this.formGroup.value.city = 'Berlin';
     }
     this.pickupAndDropoffLocation = this.formGroup.value.country + ', ' + this.formGroup.value.city + ', pick-up: '
-      + formData.pickup + ', drop-off: ' + formData.dropoff;
+       + formData.pickup + ', drop-off: ' + formData.dropoff;
+
+    console.log(this.pickupAndDropoffLocation);
     console.log(this.pickupAndDropoffLocation);
     if (formData.payMethod === 'card') {
       this.orderDetail = new OrderDetail(this.currentUser.id, this.car.id,
@@ -206,15 +212,19 @@ export class CarRentComponent implements OnInit {
     switch (country) {
       case 'Germany':
         this.cityList = this.cityGermanyList;
+        this.formGroup.value.city = this.cityGermanyList[0];
         break;
       case 'Romania':
         this.cityList = this.cityRomaniaList;
+        this.formGroup.value.city = this.cityRomaniaList[0];
         break;
       case 'Belgium':
         this.cityList = this.cityBelgiumList;
+        this.formGroup.value.city = this.cityBelgiumList[0];
         break;
       case 'Czech Republic':
         this.cityList = this.cityCzechList;
+        this.formGroup.value.city = this.cityCzechList[0];
         break;
     }
   }
